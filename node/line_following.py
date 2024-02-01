@@ -8,7 +8,7 @@ from cv_bridge import CvBridge, CvBridgeError
 import numpy as np
 import cv2
 
-FORWARD_SPEED = 0.5
+FORWARD_SPEED = 1
 ANGULAR_PROPORTIONALITY_CONSTANT = 0.02
 TRUNCATE_BOTTOM = 0.3
 
@@ -16,12 +16,14 @@ bridge = CvBridge()
 
 
 velocity_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
-debug_pub = rospy.Publisher('/debug', String, queue_size=10)
-image_pub = rospy.Publisher('/image_feed', Image, queue_size=1)
-
-prev_cX = 0
+# debug_pub = rospy.Publisher('/debug', String, queue_size=10)
+# image_pub = rospy.Publisher('/image_feed', Image, queue_size=1)
 
 def find_road(cv_image):
+    global prev_cX
+
+    if 'prev_cX' not in globals():
+        prev_cX = 0
 
     hsv_frame = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
     sat_frame = hsv_frame[:,:,1]
@@ -34,7 +36,7 @@ def find_road(cv_image):
     if M["m00"] != 0:
         cX = int(M["m10"] / M["m00"])
     else:
-        cX = prev_cX
+        cX = prev_cX # if no road was found, send the move function the old centroid location
 
     prev_cX = cX
 

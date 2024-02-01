@@ -1,0 +1,80 @@
+\hypertarget{namespaceline__following}{}\doxysection{line\+\_\+following Namespace Reference}
+\label{namespaceline__following}\index{line\_following@{line\_following}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceline__following_a9e68c60ff059878bf432216de12c9462}{find\+\_\+road}} (cv\+\_\+image)
+\begin{DoxyCompactList}\small\item\em Locate center of road and return the centroid of a truncated portion. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespaceline__following_ae711b8ed4b6ee2a81d2f4cc6ae45964b}{move\+\_\+bot}} (cv\+\_\+image)
+\begin{DoxyCompactList}\small\item\em Moves the robot forward at constant speed and turns it proportionally by its deviation from the road location. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespaceline__following_a6f48dba7bbad2e3af54e3ae38f888d1c}{callback}} (data)
+\begin{DoxyCompactList}\small\item\em Callback function to publish a velocity command whenever a new camera image input is received. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespaceline__following_adc41a044becca124e46fe45d3961f2f4}\label{namespaceline__following_adc41a044becca124e46fe45d3961f2f4}} 
+int {\bfseries F\+O\+R\+W\+A\+R\+D\+\_\+\+S\+P\+E\+ED} = 1
+\item 
+\mbox{\Hypertarget{namespaceline__following_abac25f5e15639e71e8cd6a5ac063e08e}\label{namespaceline__following_abac25f5e15639e71e8cd6a5ac063e08e}} 
+float {\bfseries A\+N\+G\+U\+L\+A\+R\+\_\+\+P\+R\+O\+P\+O\+R\+T\+I\+O\+N\+A\+L\+I\+T\+Y\+\_\+\+C\+O\+N\+S\+T\+A\+NT} = 0.\+02
+\item 
+\mbox{\Hypertarget{namespaceline__following_a8d0728dd83c04bc22734fb2d21b50ea0}\label{namespaceline__following_a8d0728dd83c04bc22734fb2d21b50ea0}} 
+float {\bfseries T\+R\+U\+N\+C\+A\+T\+E\+\_\+\+B\+O\+T\+T\+OM} = 0.\+3
+\item 
+\mbox{\Hypertarget{namespaceline__following_af3cb9b68d8e23e31d0cd71adcd024e27}\label{namespaceline__following_af3cb9b68d8e23e31d0cd71adcd024e27}} 
+{\bfseries bridge} = Cv\+Bridge()
+\item 
+\mbox{\Hypertarget{namespaceline__following_a6a973e2197308998ebf7048dbb4a1c9a}\label{namespaceline__following_a6a973e2197308998ebf7048dbb4a1c9a}} 
+{\bfseries velocity\+\_\+pub} = rospy.\+Publisher(\textquotesingle{}/cmd\+\_\+vel\textquotesingle{}, Twist, queue\+\_\+size=1)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Script to make robot follow a blue line using proportional control 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceline__following_a6f48dba7bbad2e3af54e3ae38f888d1c}\label{namespaceline__following_a6f48dba7bbad2e3af54e3ae38f888d1c}} 
+\index{line\_following@{line\_following}!callback@{callback}}
+\index{callback@{callback}!line\_following@{line\_following}}
+\doxysubsubsection{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily def line\+\_\+following.\+callback (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})}
+
+
+
+Callback function to publish a velocity command whenever a new camera image input is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the Image data to be processed from the robot\textquotesingle{}s camera feed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespaceline__following_a9e68c60ff059878bf432216de12c9462}\label{namespaceline__following_a9e68c60ff059878bf432216de12c9462}} 
+\index{line\_following@{line\_following}!find\_road@{find\_road}}
+\index{find\_road@{find\_road}!line\_following@{line\_following}}
+\doxysubsubsection{\texorpdfstring{find\_road()}{find\_road()}}
+{\footnotesize\ttfamily def line\+\_\+following.\+find\+\_\+road (\begin{DoxyParamCaption}\item[{}]{cv\+\_\+image }\end{DoxyParamCaption})}
+
+
+
+Locate center of road and return the centroid of a truncated portion. 
+
+Returns previously found centroid if no road is detected. 
+\begin{DoxyParams}{Parameters}
+{\em cv\+\_\+image} & the open\+CV format image to be processed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespaceline__following_ae711b8ed4b6ee2a81d2f4cc6ae45964b}\label{namespaceline__following_ae711b8ed4b6ee2a81d2f4cc6ae45964b}} 
+\index{line\_following@{line\_following}!move\_bot@{move\_bot}}
+\index{move\_bot@{move\_bot}!line\_following@{line\_following}}
+\doxysubsubsection{\texorpdfstring{move\_bot()}{move\_bot()}}
+{\footnotesize\ttfamily def line\+\_\+following.\+move\+\_\+bot (\begin{DoxyParamCaption}\item[{}]{cv\+\_\+image }\end{DoxyParamCaption})}
+
+
+
+Moves the robot forward at constant speed and turns it proportionally by its deviation from the road location. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cv\+\_\+image} & the open\+CV format image to be processed \\
+\hline
+\end{DoxyParams}

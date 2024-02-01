@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+## @package line_following
+#  Script to make robot follow a blue line using proportional control
+
 import rospy
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Image
@@ -19,7 +22,10 @@ velocity_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
 # debug_pub = rospy.Publisher('/debug', String, queue_size=10)
 # image_pub = rospy.Publisher('/image_feed', Image, queue_size=1)
 
+## Locate center of road and return the centroid of a truncated portion. Returns previously found centroid if no road is detected.
+# @param cv_image the openCV format image to be processed
 def find_road(cv_image):
+
     global prev_cX
 
     if 'prev_cX' not in globals():
@@ -48,7 +54,8 @@ def find_road(cv_image):
 
     return cX
 
-
+## Moves the robot forward at constant speed and turns it proportionally by its deviation from the road location.
+# @param cv_image the openCV format image to be processed
 def move_bot(cv_image):
     move = Twist()
     move.linear.x = FORWARD_SPEED
@@ -59,7 +66,8 @@ def move_bot(cv_image):
 
     velocity_pub.publish(move)
 
-
+## Callback function to publish a velocity command whenever a new camera image input is received
+# @param data the Image data to be processed from the robot's camera feed
 def callback(data):
     try:
         cv_image = bridge.imgmsg_to_cv2(data, desired_encoding='passthrough')
